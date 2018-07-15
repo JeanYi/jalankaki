@@ -3,6 +3,12 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.0'
 
+# Bootstrap
+gem 'bootstrap', '~> 4.1.1'
+# Sprockets 
+gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
+# JQuery 
+gem 'jquery-rails'
 # Google OAuth2 
 gem 'omniauth'
 gem 'omniauth-google-oauth2'
