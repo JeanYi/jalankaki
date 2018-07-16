@@ -1,3 +1,17 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "bootstrap";
+
+// Styling 
+
+#users {
+	margin:10%; 
+	h3 {
+	text-align:center;
+	}
+}
+
+.wrapper {
+	text-align: center;
+}
+
+
+

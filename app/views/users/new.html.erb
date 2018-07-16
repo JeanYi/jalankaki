@@ -1,5 +1,10 @@
-<h1>New User</h1>
+<div id="users" class="sign-up">
 
-<%= render 'form', user: @user %>
+	<h3>Sign Up</h3>
 
-<%= link_to 'Back', users_path %>
+		<%= render partial: 'form' %>
+		<div class= "other-links"> <%= link_to 'Back', users_path %> </div>
+
+</div>
+
+
