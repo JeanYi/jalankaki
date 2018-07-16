@@ -14,19 +14,32 @@
 
   </head>
 
+
+  <body>
+
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
       <a class="navbar-brand" href="/">Home</a>
       <ul class="nav nav-pills">
+        <% if !logged_in? %> 
         <li class="nav-item">
-          <a class="nav-link" href="#">Sign in</a>
+          <%= link_to "Sign in", login_path%> 
         </li>
+        <% else %> 
         <li class="nav-item ">
-          <a class="nav-link" href="#">Link</a>
+          <%= link_to "Sign out", logout_path, method: :delete %> 
         </li>
+        <% end %> 
       </ul>
     </nav>
+    
+    <div class="flash-msg">
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>"><%= message %></div>
+      <% end %>
+    </div>
 
-  <body>
     <%= yield %>
+
+
   </body>
 </html>
