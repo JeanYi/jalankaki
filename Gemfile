@@ -4,7 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.5.0'
 
 # Bootstrap
-gem 'bootstrap', '~> 4.1.1'
+gem 'bootstrap'
 # Sprockets 
 gem 'sprockets-rails', '~> 3.0', '>= 3.0.4'
 # JQuery 

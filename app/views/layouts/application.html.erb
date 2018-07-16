@@ -4,7 +4,8 @@
     <title>Jalankaki</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
@@ -12,6 +13,18 @@
     </script>![endif]-->
 
   </head>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+      <a class="navbar-brand" href="/">Home</a>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Sign in</a>
+        </li>
+        <li class="nav-item ">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </nav>
 
   <body>
     <%= yield %>
