@@ -1,0 +1,33 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th style="width:10%">Activity</th>
+        <th style="width:30%">Title</th>
+        <th style="width:10%">Participants </th>
+        <th style="width:10%">Location</th>        
+        <th style="width:10%">Date</th>
+        <th style="width:10%">Time</th>
+        <th style="width:20%">Hosted By</th>
+        <th style="width:10%">Join </th>
+      </tr>
+    </thead>
+    <tbody>
+        <% @activities.each do |a| %> 
+      <tr>
+        <td><%= link_to a.activity.sub(/\S/, &:upcase), activity_path(a) %></td>
+        <td><%= a.title %></td>
+        <td><%= a.participants.count %> </td>
+        <td><%= a.location.sub(/\S/, &:upcase) %></td>
+        <td><%= a.activity_date.strftime("%d-%b-%y") %></td>
+        <td><%= a.start_time.strftime("%I:%M%p") %> - <%= a.end_time.strftime("%I:%M%p") %></td>
+        <td><%= a.hosted_by.sub(/\S/, &:upcase) %></td>
+        <td><%= button_to 'Join', participants_path, method: :post, class:"btn btn-success", params: {activity_id: a.id } %>
+        </td>
+      </tr>
+        <% end %> 
+    </tbody>
+  </table>
+</div>
+
+

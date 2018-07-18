@@ -9,6 +9,9 @@ class User < ApplicationRecord
 			  		  format: { with: VALID_EMAIL_REGEX },
                       uniqueness: { case_sensitive: false }
     has_many :authentications, dependent: :destroy
+	mount_uploader :image, ImageUploader
+	has_many :participants 
+  	has_many :activities, through: :participants 
 
 	 def self.create_with_auth_and_hash(authentication, auth_hash)
 	   user = self.create!(

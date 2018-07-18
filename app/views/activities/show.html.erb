@@ -1,0 +1,53 @@
+<div class="container-fluid">
+  <div class="jumbotron">
+
+  	<div class="row">
+	  	<div class="col-sm-2">
+	  	<% if @activity.images != nil %> 
+	  			<% @activity.images.each do |i| %> 
+	  				<img src= "<%=i.thumb.url %>", style="margin-left:15px">
+	  			<% end %> 
+	  		<% end %>
+	  	</div>
+	  	<div class="col-sm-10"> 
+	  		<strong> <%= @activity.title.upcase %> </strong> <br/>
+	  		<%= @activity.location.sub(/\S/, &:upcase) %> <br/> 
+	  		Date: <%= @activity.activity_date.strftime("%d-%b-%y") %> <br/> 
+	  		Activity: <%= @activity.activity.sub(/\S/, &:upcase) %> <br/>
+			
+			<% if current_user && current_user.admin? %> 
+				<%= button_to 'Edit', edit_activity_path(@activity.id), class:"btn btn-info", method: :get %>
+			<% end %> 
+	  	
+	  	</div>
+  	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row-description"> 
+		<h4> Description </h4> <br/> 
+		<%= @activity.description %> 
+	</div>
+</div>
+
+<div class="container-fluid">
+	<div class="row-direction"> 
+		<h4> Direction </h4> <br/> 	
+	</div>
+	
+	<div class="row"> 
+		<iframe class="google-maps"
+		  width="600"
+		  height="450"
+		  frameborder="0" style="border:1px, border-style:solid"
+		  src="https://www.google.com/maps/embed/v1/place?key=<%= ENV['GOOGLE_API_KEY'] %>&q=<%= u @activity.location %>" allowfullscreen>
+		</iframe>
+	</div>
+</div>
+
+
+
+
+
+
+
