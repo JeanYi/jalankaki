@@ -1,0 +1,52 @@
+<%= form_for @activity do |f| %>
+
+  <%= render 'shared/error_messages', object: @activity %>
+
+      <div class="form-group">
+        <%= f.label :title %>
+        <%= f.text_field :title, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+    		<%= f.label :activity %>
+    		<%= f.select(:activity, Activity.activities.keys.map {|activity|[activity.titleize,activity]}, class: 'form-control') %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :location %>
+        <%= f.text_field :location, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :description%>
+        <%= f.text_area :description, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :activity_date %>
+        <%= f.date_field :activity_date, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :start_time %>
+        <%= f.time_field :start_time, class: 'form-control' %>
+
+        <%= f.label :end_time %>
+        <%= f.time_field :end_time, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :hosted_by %>
+        <%= f.text_field :hosted_by, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :images %>
+        <%= f.file_field :images, multiple: true %>
+      </div>
+
+      <div class="wrapper"> 
+        <%= f.submit "Submit", class: "btn btn-primary" %>
+      </div>
+
+<% end %> 

@@ -2,7 +2,10 @@ source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.5.0'
-
+# Uploading images 
+gem 'mini_magick', '~> 4.8'
+gem 'carrierwave', '~> 1.0'
+gem 'file_validators'
 # Bootstrap
 gem 'bootstrap'
 # Sprockets 
