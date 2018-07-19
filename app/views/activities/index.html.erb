@@ -1,5 +1,6 @@
 <div class="container">
-  <table class="table table-hover">
+  <br/>
+  <table class="table table-bordered-hover">
     <thead>
       <tr>
         <th style="width:10%">Activity</th>
@@ -9,20 +10,25 @@
         <th style="width:10%">Date</th>
         <th style="width:10%">Time</th>
         <th style="width:20%">Hosted By</th>
-        <th style="width:10%">Join </th>
+        <% if current_user && current_user.admin? %> 
+        <th style="width:30%">Action </th>
+        <% end %> 
       </tr>
     </thead>
-    <tbody>
+    <tbody id=myTable>
         <% @activities.each do |a| %> 
       <tr>
-        <td><%= link_to a.activity.sub(/\S/, &:upcase), activity_path(a) %></td>
+        <td><%= link_to a.activity.sub(/\S/, &:upcase).titleize, activity_path(a) %></td>
         <td><%= a.title %></td>
-        <td><%= a.participants.count %> </td>
+        <td><%= link_to a.participants.count, participants_path %> </td>
         <td><%= a.location.sub(/\S/, &:upcase) %></td>
         <td><%= a.activity_date.strftime("%d-%b-%y") %></td>
         <td><%= a.start_time.strftime("%I:%M%p") %> - <%= a.end_time.strftime("%I:%M%p") %></td>
         <td><%= a.hosted_by.sub(/\S/, &:upcase) %></td>
-        <td><%= button_to 'Join', participants_path, method: :post, class:"btn btn-success", params: {activity_id: a.id } %>
+        <% if current_user && current_user.admin? %> 
+        <td><%= link_to 'Delete', activity_path(a), method: :delete, data: {confirm: "Are you sure?"} %>
+            <%= link_to 'Edit', edit_activity_path(a) %>
+            <% end %> 
         </td>
       </tr>
         <% end %> 
@@ -30,4 +36,15 @@
   </table>
 </div>
 
+<script>
+$(document).ready(function(){
+  $("#myInput").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#myTable tr").filter(function() {
+      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+  });
+});
+</script>
 
+<!-- Start the search in tbody, to prevent filtering the table headers -->

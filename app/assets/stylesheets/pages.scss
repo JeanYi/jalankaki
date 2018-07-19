@@ -25,3 +25,29 @@ p.lead a {
   margin-top: 20px;
   border-radius:20px;
 }
+
+.container-fluid {
+	margin-top: 50px;
+	width: 90%;
+	text-align: center;
+}
+
+.button-homepage {
+	background-color:#FF8C00;
+	font-weight:bold;
+	border-radius: 5px;
+    border: none;
+    color: white;
+    padding: 5px 10px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 14px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.tag label {
+	color:#FF6347;
+	font-weight:bold;
+}

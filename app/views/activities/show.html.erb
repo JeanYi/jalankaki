@@ -1,36 +1,48 @@
-<div class="container-fluid">
-  <div class="jumbotron">
+<style> 
+.like a:hover {
+	background-color: transparent; 
+	text-decoration: none; 
+}
+</style>
 
+<div class="container-fluid" style="text-align: left">
+  <div class="jumbotron">
   	<div class="row">
-	  	<div class="col-sm-2">
+	  	<div class="col-xs-3" style="margin-right:20px">
 	  	<% if @activity.images != nil %> 
 	  			<% @activity.images.each do |i| %> 
-	  				<img src= "<%=i.thumb.url %>", style="margin-left:15px">
+	  				<img src= "<%=i.medthumb.url %>", style="margin-left:15px">
 	  			<% end %> 
-	  		<% end %>
+	  	<% end %>
 	  	</div>
-	  	<div class="col-sm-10"> 
-	  		<strong> <%= @activity.title.upcase %> </strong> <br/>
-	  		<%= @activity.location.sub(/\S/, &:upcase) %> <br/> 
-	  		Date: <%= @activity.activity_date.strftime("%d-%b-%y") %> <br/> 
-	  		Activity: <%= @activity.activity.sub(/\S/, &:upcase) %> <br/>
-			
-			<% if current_user && current_user.admin? %> 
-				<%= button_to 'Edit', edit_activity_path(@activity.id), class:"btn btn-info", method: :get %>
-			<% end %> 
-	  	
+
+	  	<div class="col-xs-8"> 
+	  		<div class="description">
+	  			<strong> <%= @activity.title.upcase %> </strong> <br/>
+		  		Location: <%= @activity.location.sub(/\S/, &:upcase) %> <br/> 
+		  		Date: <%= @activity.activity_date.strftime("%d-%b-%y") %> <br/> 
+		  		Activity: <%= @activity.activity.sub(/\S/, &:upcase) %> <br/>
+		  		<%= button_to 'Join', participants_path, method: :post, class:"btn btn-success", params: {activity_id: params[:id]} %>
+	  		</div> 
+
+			<div class="like" style="margin-top:10px;">
+				<%= link_to like_activity_path(@activity), method: :put, remote: :true, id: "like-btn" do %> 
+				<span><i class="far fa-thumbs-up fa-2x"></i></span> 
+				<% end %> 
+			 	<span class="likes-count"><%= @activity.get_upvotes.size %></span> Likes
+			</div>
 	  	</div>
   	</div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid" style="text-align: left">
 	<div class="row-description"> 
 		<h4> Description </h4> <br/> 
 		<%= @activity.description %> 
 	</div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid"style="text-align: left">
 	<div class="row-direction"> 
 		<h4> Direction </h4> <br/> 	
 	</div>
@@ -44,7 +56,6 @@
 		</iframe>
 	</div>
 </div>
-
 
 
 

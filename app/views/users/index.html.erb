@@ -1,25 +1,29 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid" style="text-align: left">
+  <h3>Users</h3>
 
-<h1>Users</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @users.each do |user| %>
+  <table class="table table-striped">
+    <thead>
       <tr>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th style="width:5%">ID</th>
+        <th style="width:10%">Name</th>
+        <th style="width:10%">Email</th>        
+        <th style="width:10%">Details</th>
+        <th style="width:10%">Edit</th>
+        <th style="width:10%">Delete</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
 
-<br>
-
-<%= link_to 'New User', new_user_path %>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.name.sub(/\S/, &:upcase) %></td>        
+          <td><%= user.email %></td>
+          <td><%= link_to 'Show', user_path(user) %></td>
+          <td><%= link_to 'Edit', edit_user_path(user) %></td>
+          <td><%= link_to 'Destroy', user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -17,6 +17,10 @@
 
 /* Errors shown in forms */
 
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
 #error_explanation {
   color: red;
   ul {
@@ -25,7 +29,38 @@
   }
 }
 
-li.nav-item {
-	margin:auto;
-	color:blue;
+.nav-item-left {
+    margin-right:10px;
+    a {
+    color:white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    }
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+a:link, a:visited, a:hover, a:active {
+   color:grey;
+}
+
+a:hover {
+    color:blue;
+    background-color: transparent; 
+    text-decoration: none; 
+}
+
+#welcome {
+    margin: 10px;
+    text-align: center;
+    color: white;
+    font-size: 14px;
 }
