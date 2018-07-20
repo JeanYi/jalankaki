@@ -5,6 +5,8 @@ class Activity < ApplicationRecord
 	validates :activity, presence: true 
 	validates :location, presence: true 
  	mount_uploaders :images, ImageUploader
+ 	acts_as_votable 
 end
+
 
 

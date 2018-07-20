@@ -1,0 +1,26 @@
+<div class="container-fluid" style="text-align: left">
+  <h3>Participants</h3>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th style="width:10%">Participant ID</th>
+        <th style="width:10%">User ID</th>
+        <th style="width:10%">Delete</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @participants.each do |i| %>
+        <tr>
+          <td><%= i.id %></td>
+          <td><%= i.user_id %></td>
+          <td><%= link_to 'Destroy', participant_path(i), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<div style="margin:auto;"> <%= link_to "Back", activities_path%> </div>
+
+</div>

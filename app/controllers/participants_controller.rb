@@ -4,17 +4,25 @@ class ParticipantsController < ApplicationController
       @participant.activity = Activity.find(params[:activity_id])
       @participant.user = current_user 
       if @participant.save 
-      	redirect_to activities_path 
+        flash[:success] = "Thank you for signing up to this event. Check your profile to see activities you have signed up for."
+      	redirect_to activity_path(@participant.activity)
       else 
-        flash[:error] = "You have already join this activity, or please sign in to join"
-        redirect_to activities_path 
+        flash[:error] = "You have already join this activity (check your profile), or please sign in to join"
+        redirect_to activity_path(@participant.activity)
       end 
     end
 
     def destroy
-      @participant = Participant.where(activity_id: params[:activity_id], participant_id: params[:id])[0].destroy()
-      redirect_to Activity.find(params[:activity_id])
+      @participant = Participant.find(params[:id])
+        if @participant.destroy 
+        flash[:success] = "You have remove this user from this activity."
+        redirect_to participants_path 
+      end 
   	end
+
+    def index 
+      @participants = Participant.order(:id) 
+    end 
 
   private 
 

@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Jalankaki</title>
+    <title>Jalan Kaki</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => 'reload'%>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
 
     <!--[if lt IE 9]> <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js">
     </script>![endif]-->
@@ -15,39 +15,65 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 
+    <!--  Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,900" rel="stylesheet">
+  
   </head>
-
-
   <body>
 
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
       <a class="navbar-brand" href="/">Home</a>
-      <ul class="nav nav-pills">
-        <% if !logged_in? %> 
-        <li class="nav-item">
-          <%= link_to "Sign in", login_path%> 
-        </li>
-        <% else %> 
-        <li class="nav-item ">
-          <%= link_to "Sign out", logout_path, method: :delete %> 
-        </li>
-        <% end %> 
-        <!-- Dropdown -->
+        <ul class="navbar-nav mr-auto">
+          <!-- Sign Up Link -->
+          <li class="nav-item-left">
+            <% if(current_user || current_user.nil?) %> 
+                <%= button_to "Sign up", signup_path, method: :get, class:"btn btn-warning" %> 
+            <% end %> 
+          </li>
+          
+          <!-- Dropdown for Account-->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" style="color:white">
+              Account
+            </a>
+              <div class="dropdown-menu">
+              <% if !logged_in? %> 
+                <%= link_to "Sign in", login_path, class: "dropdown-item" %> 
+              <% else %> 
+                <%= link_to "Sign out", logout_path, method: :delete, class: "dropdown-item"%> 
+                <%= link_to "Profile", user_path(current_user), class: "dropdown-item"%> 
+              </div>
+            <% end %> 
+          </li>
+        
+        <!-- Dropdown for Activities -->
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-            Activities
-          </a>
-          <% if(current_user || current_user.nil?) %> 
-          <div class="dropdown-menu">
-            <%= link_to "All Activities", activities_path, class: "dropdown-item" %> 
           <% if current_user && current_user.admin? %> 
-            <%= link_to "New Activity", new_activity_path, class: "dropdown-item" %> 
-          </div>
-          <% end %> 
+          <a class="nav-link dropdown-toggle" id="navbardrop" data-toggle="dropdown" style="color:white">
+            Admin
+          </a>
+            <div class="dropdown-menu">
+              <%= link_to "All Activities", activities_path, class: "dropdown-item" %> 
+              <%= link_to "New Activity", new_activity_path, class: "dropdown-item" %>
+              <%= link_to "All Users", users_path, class: "dropdown-item" %>
+            </div>
           <% end %> 
         </li>
       </ul>
-    </nav>
+
+      <ul class="navbar-nav">
+         <% if logged_in? %> 
+            <li class="nav-item-left">
+               <div id="welcome"> Welcome, <%= current_user.name %> </div>
+            </li>
+         <% end %> 
+
+          <!-- Search Bar -->
+             <li class="nav-item ml-md-auto">
+                <input class="form-control" id="myInput" type="text" placeholder="Search.." style="width:100%">
+            </li>
+      </ul>
+  </nav>
     
     <div class="flash">
       <% flash.each do |key, value| %>
@@ -57,6 +83,6 @@
 
     <%= yield %>
 
-
   </body>
+  
 </html>

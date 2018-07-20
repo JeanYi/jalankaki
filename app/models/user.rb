@@ -10,8 +10,9 @@ class User < ApplicationRecord
                       uniqueness: { case_sensitive: false }
     has_many :authentications, dependent: :destroy
 	mount_uploader :image, ImageUploader
-	has_many :participants 
+	has_many :participants, dependent: :destroy  
   	has_many :activities, through: :participants 
+  	acts_as_voter 
 
 	 def self.create_with_auth_and_hash(authentication, auth_hash)
 	   user = self.create!(

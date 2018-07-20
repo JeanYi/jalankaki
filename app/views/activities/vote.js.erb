@@ -1,0 +1,15 @@
+$(document).ready(function(){
+	console.log("asdf")
+	let likeBtn = document.querySelector('#like-btn')
+	let likeCount = document.querySelector('.likes-count')
+
+	<% if current_user.liked?(@activity) %> 
+		likeBtn.class = "liked"
+		// $('.like-btn').addClass('liked');
+	<% else %> 
+		likeBtn.class = "unliked"
+		// $('.like-btn').addClass('like-btn');
+	<% end %>
+	// likeCount.innerHTML = "<%= @activity.get_upvotes.size %>"
+	$('.likes-count').html(<%= @activity.get_upvotes.size %>);
+});
